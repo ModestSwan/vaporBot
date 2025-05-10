@@ -124,7 +124,7 @@ class Build2DetailsModal(ui.Modal, title='Enter Build #2 Details'):
 
         comparison_message = (
             f"**{higher_build_name}**: {higher_build_stats} - **{normalised_higher_dmg:.2f}%**\n"
-            f"**{lower_build_name}**: {lower_build_stats} - **100**"
+            f"**{lower_build_name}**: {lower_build_stats} - **100%**"
         )
         await interaction.response.send_message(comparison_message, ephemeral=True)
 
