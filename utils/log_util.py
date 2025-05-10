@@ -1,8 +1,10 @@
+# \vaporBot\utils\log_util.py
 import json
 import os
 from datetime import datetime
 
 LOG_FILE_PATH = "./message_logs.json"
+
 
 def log_command_to_file(user, guild, channel, command, response):
     log_entry = {
@@ -27,6 +29,7 @@ def log_command_to_file(user, guild, channel, command, response):
 
     with open(LOG_FILE_PATH, "w", encoding="utf-8") as f:
         json.dump(logs, f, indent=2)
+
 
 async def send_and_log(ctx, content=None, embed=None):
     if content:

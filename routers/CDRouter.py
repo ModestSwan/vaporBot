@@ -1,11 +1,11 @@
-import json
+# \vaporBot\routers\CDRouter.py
+from datetime import datetime
 
 import discord
 from dateutil.relativedelta import relativedelta
 from discord.ext import commands
-from utils.config_util import get_next_patch_number, get_patch_details, get_art_url, get_stream_details
-from datetime import datetime
 
+from utils.config_util import get_next_patch_number, get_patch_details, get_art_url, get_stream_details
 from utils.log_util import send_and_log
 
 

@@ -1,4 +1,4 @@
-#\vaporBot\main.py
+# \vaporBot\main.py
 import bot
 
 if __name__ == '__main__':

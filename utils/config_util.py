@@ -1,3 +1,4 @@
+# \vaporBot\utils\config_util.py
 import json
 import time
 
@@ -12,24 +13,27 @@ def get_art_url(art_id):
 
     raise ValueError(f"No artwork found for art_id '{art_id}'")
 
+
 def get_patch_details(patch_number):
     with open('./patch_details.json', 'r', encoding='utf-8') as f:
         data = json.load(f)
 
-    for patch_details in data.get("PATCH_DETAILS",[]):
-        if patch_details.get("patch_number")==patch_number:
+    for patch_details in data.get("PATCH_DETAILS", []):
+        if patch_details.get("patch_number") == patch_number:
             return patch_details
     return None
+
 
 def get_next_patch_number():
     currentTS = int(time.time())
     with open('./patch_details.json', 'r', encoding='utf-8') as f:
         data = json.load(f)
 
-    for patch_details in data.get("PATCH_DETAILS",[]):
+    for patch_details in data.get("PATCH_DETAILS", []):
         if patch_details.get("timestamp") >= currentTS:
             return patch_details.get("patch_number")
     return None
+
 
 def get_stream_details():
     try:
@@ -39,6 +43,7 @@ def get_stream_details():
     except (FileNotFoundError, json.JSONDecodeError):
         return None
 
+
 def get_testing_servers():
     try:
         with open('./config.json', 'r', encoding='utf-8') as f:
@@ -46,4 +51,3 @@ def get_testing_servers():
             return data.get("testing_servers", [])
     except (FileNotFoundError, json.JSONDecodeError):
         return []
-
