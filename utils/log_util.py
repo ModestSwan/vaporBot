@@ -3,17 +3,29 @@ import json
 import os
 from datetime import datetime
 
+import discord
+
 LOG_FILE_PATH = "./message_logs.json"
 
 
-def log_command_to_file(user, guild, channel, command, response):
+def log_command_to_file(user_id, user_name, guild_id, guild_name, channel_id, channel_name, command_message_id,
+                        command_content, response, response_message_id):
     log_entry = {
-        "timestamp": datetime.utcnow().isoformat(),
-        "user": user,
-        "guild": guild,
-        "channel": channel,
-        "command": command,
-        "response": response
+        "command": {
+            "timestamp": datetime.utcnow().isoformat(),
+            "message_id": command_message_id,
+            "user_id": user_id,
+            "user_name": user_name,
+            "guild_id": guild_id,
+            "guild_name": guild_name,
+            "channel_id": channel_id,
+            "channel_name": channel_name,
+            "content": command_content
+        },
+        "response": {
+            "content": response,
+            "message_id": response_message_id
+        }
     }
 
     if os.path.exists(LOG_FILE_PATH):
@@ -46,12 +58,26 @@ async def send_and_log(ctx, content=None, embed=None):
     else:
         return None
 
+    command_content = None
+    command_message_id = None
+    if hasattr(ctx, 'message'):
+        command_content = ctx.message.content
+        command_message_id = ctx.message.id
+    elif isinstance(ctx, discord.ApplicationContext) and ctx.command:
+        command_content = f"/{ctx.command.name} {' '.join(f'{option.name}:{option.value}' for option in ctx.selected_options)}"
+        command_message_id = ctx.interaction.id  # Interaction ID for slash commands
+
     log_command_to_file(
-        user=str(ctx.author),
-        guild=str(ctx.guild),
-        channel=str(ctx.channel),
-        command=ctx.message.content,
-        response=response_log
+        user_id=ctx.author.id,
+        user_name=str(ctx.author),
+        guild_id=ctx.guild.id if ctx.guild else None,
+        guild_name=str(ctx.guild) if ctx.guild else None,
+        channel_id=ctx.channel.id,
+        channel_name=str(ctx.channel),
+        command_message_id=command_message_id,
+        command_content=command_content,
+        response=response_log,
+        response_message_id=msg.id
     )
 
     return msg

@@ -1,10 +1,8 @@
 # \vaporBot\routers\DefaultRouter.py
 import discord
-from discord import app_commands
 from discord.ext import commands
 
-from ui.number_input_modal import Build1DetailsModal
-from utils.log_util import log_command_to_file, send_and_log
+from utils.log_util import send_and_log
 
 
 class DefaultRouter(commands.Cog):

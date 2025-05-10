@@ -1,11 +1,11 @@
 # \vaporBot\bot.py
 import json
-import traceback
 
 import discord
 from discord.ext import commands
 
 from PrereqsChecker import PrereqsChecker
+from routers.AdminRouter import AdminRouter
 from routers.CDRouter import CDRouter
 from routers.DefaultRouter import DefaultRouter
 from routers.UIRouter import UIRouter
@@ -26,12 +26,11 @@ async def on_ready():
     print(f'Logged in as {bot.user}')
 
 
-
 async def setup_hook():
     await bot.add_cog(DefaultRouter(bot))
     await bot.add_cog(CDRouter(bot))
     await bot.add_cog(UIRouter(bot))
-
+    await bot.add_cog(AdminRouter(bot))
 
 
 bot.setup_hook = setup_hook
