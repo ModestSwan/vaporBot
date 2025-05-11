@@ -33,7 +33,7 @@ class Build1DetailsModal(ui.Modal, title='Enter Build #1 Details'):
         try:
             atk = float(self.scaling_stat_b1.value)
             dmg_bonus_percent = float(self.dmg_bonus_percent_b1.value)
-            crit_rate_percent = float(self.crit_rate_percent_b1.value)
+            crit_rate_percent = min(float(self.crit_rate_percent_b1.value), 100)
             crit_dmg_percent = float(self.crit_dmg_percent_b1.value)
             self.build1_details_raw = {
                 'atk': atk,
@@ -76,7 +76,7 @@ class Build2DetailsModal(ui.Modal, title='Enter Build #2 Details'):
         try:
             atk = float(self.scaling_stat_b2.value)
             dmg_bonus_percent = float(self.dmg_bonus_percent_b2.value)
-            crit_rate_percent = float(self.crit_rate_percent_b2.value)
+            crit_rate_percent = min(float(self.crit_rate_percent_b2.value), 100)
             crit_dmg_percent = float(self.crit_dmg_percent_b2.value)
             self.build2_details_raw = {
                 'atk': atk,
