@@ -15,7 +15,7 @@ class DefaultRouter(commands.Cog):
 
         {bold}Commands{bold}:
         {bold}v!patchCD{bold} : Countdown till the next Genshin version update
-        {bold}v!patchCD <version_number>{bold} : Countdown till the specific Genshin version update. Usage example: z!patchCD 3.8
+        {bold}v!patchCD <version_number>{bold} : Countdown till the specific Genshin version update. Usage example: v!patchCD 5.8
         {bold}v!streamCD{bold} : Countdown till the next Genshin livestream
         {bold}/comparebuilds{bold} : Compare different builds based on atk/bonusDmg/critRate/critDmg
 
